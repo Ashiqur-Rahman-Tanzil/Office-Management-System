@@ -1,0 +1,67 @@
+body{
+    background-image: url("home_back.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+
+
+ul{
+    list-style-type: none;
+    margin: 10px;
+    padding: 0s;
+    overflow: hidden;
+    background-color: rgba(14, 32, 25, 0.527);
+    border-radius: 8px;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: inline-block ;
+    color: whitesmoke;
+    text-align: justify;
+    padding: 16px 18px;
+    text-decoration: none;
+    font-size: 25px;
+    border-radius: 10px;
+    
+}
+
+li a:hover:not(.active) {
+    background-color: #111;
+}
+
+a.active {
+    background-color: #4CAF50;
+}
+
+.footer{
+    position: relative;
+   left: 13px;
+   bottom: 0;
+   width: 98%;
+   background-color: rgba(117, 93, 93, 0);
+   color: white;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 50px;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    color:#050404;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }

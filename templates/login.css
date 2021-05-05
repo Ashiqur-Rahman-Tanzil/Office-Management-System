@@ -1,0 +1,41 @@
+body{
+    background-image: url("login_back.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    
+}
+
+input.idtake{
+    border-color: coral;
+    border-radius: 12px;
+    background-color: lightgoldenrodyellow;
+}
+input.pwdtake{
+    background-color: lightgoldenrodyellow;
+    border-color: coral;
+    border-radius: 12px;
+}
+input.loginbtn{
+    border-style: none;
+    border-radius: 15px;
+    border-color: lightgoldenrodyellow;
+    background-color: lightgoldenrodyellow;
+    cursor: pointer;
+    display: inline-block;
+}
+form{
+    display: block;
+    text-align: center;
+}
+
+button.newuser{
+    border-style: none;
+    border-radius: 15px;
+    border-color: lightgoldenrodyellow;
+    background-color: lightgoldenrodyellow;
+    cursor: pointer;
+}
+p{
+    color: lightgoldenrodyellow;
+}

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Notice Board | Office Mangement System</title>
+    <link rel="shortcut icon" type="image" href="Icon.png">
+    <link rel="stylesheet" type="text/css" href="notice_board.css">
+</head>
+
+
+<body>
+        <img src="Logo_final.png" alt="Office logo" width="200" height="150">
+        <span style="float: right;">
+            <a href="login.html">
+                <button class="logout" style="font-size: 20px; border-radius: 8px; border-style: none; cursor: pointer;" >log out</button>
+            </a>
+        </span>
+        <h1 style="font-size: 35px; color: rgb(153, 218, 212);"><b>NSU Office</b></h1>
+
+    <div class="Navi_bar">
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a class="active" href="notice_board.html">Notice Board</a></li>
+            <li><a href="meetings.html">Meetings</a></li>
+            <li><a href="#attendance">Attendance</a></li>
+            <li><a href="#salary">Salary</a></li>
+            <li><a href="#project_history">Project History & Outcomes</a></li>
+            <li><a href="#employee_ofthe_month">Employee of the Month</a></li>
+            <li><a href="#client&Project_details">Client & Project Details</a></li>
+          </ul>
+    </div>
+
+    <center>
+    <div class="dropdown">
+        <button class="dropbtn">Group By</button>
+        <div class="dropdown-content">
+        <a id="date" href="notice_board.py.groupByDate()">By date</a>
+        <a id="dept"><div class="dropdown1">
+            <button class="dropbtn1">Department</button>
+            <div class="dropdown-content1">
+            <a href="notice_board.py.groupByDept(333)">admin</a>
+            <a href="notice_board.py.groupByDept(111)">r&D</a>
+            <a href="notice_board.py.groupByDept(222)">Marketing</a>
+            </div>
+          </div></a>
+        <a id="priority"><div class="dropdown2">
+            <button class="dropbtn2">Priority Level</button>
+            <div class="dropdown-content2">
+            <a href="notice_board.py.groupByPriority(1)">1</a>
+            <a href="notice_board.py.groupByPriority(2)">2</a>
+            <a href="notice_board.py.groupByPriority(3)">3</a>
+            <a href="notice_board.py.groupByPriority(4)">4</a>
+            <a href="notice_board.py.groupByPriority(5)">5</a>
+            </div></a>
+        </div>
+    </div>
+    </center>
+
+
+    <table>
+        <tr>
+            <th>Notice</th>
+        </tr>
+        {% for r in notices %}
+        <tr>
+            <td> {{r}} </td>
+        {% endfor %} 
+    </table>
+
+
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <div class="footer">
+    <p class="low" style="text-align:left; ">
+        <hr>
+        <a href="help_info.html" style="text-decoration: none; color: lightgoldenrodyellow; font-size: 20px;">About Us</a>
+        <span style="float:right;">
+            <a href="help_info.html" style="text-decoration: none; color: lightgoldenrodyellow; font-size: 20px;">Contact Us</a>
+        </span>
+    </p>
+
+
+    <p class="low" style="text-align:left; font-size: 20px;">
+        <a href="help_info.html" style="text-decoration: none; color: lightgoldenrodyellow;">Help</a>
+        <span style="float:right; color: lightgoldenrodyellow;">
+            Address
+        </span>
+    </p>
+
+
+    <p class="low" style="text-align: right; font-size: 18px; color: lightgoldenrodyellow;">
+        North South University.<br>
+        SAC Building, 9th Floor.
+    </p>
+    </div>
+    
+</body>
+
+
+</html>
