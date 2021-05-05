@@ -1,0 +1,311 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>notice_board &mdash; Office Management System 2021 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'2021',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: ''
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+     
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Office Management System
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.00
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../login.html">login module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../meetings.html">meetings module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notice_board.html">notice_board module</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Office Management System</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Module code</a> &raquo;</li>
+        
+      <li>notice_board</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for notice_board</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This program will show all posted notices in our Office Management System.</span>
+<span class="sd">There are four functions to group them for the user help.</span>
+<span class="sd">Author: Ashiqur Rahman</span>
+<span class="sd">ID: 1712389642</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">render_template</span> <span class="c1"># Renders to tmeplates.</span>
+<span class="kn">import</span> <span class="nn">psycopg2</span>
+<span class="kn">import</span> <span class="nn">psycopg2.extras</span>
+
+<span class="n">DB_NAME</span> <span class="o">=</span> <span class="s2">&quot;officemanagementsystem&quot;</span> <span class="c1">#database name.</span>
+<span class="n">DB_HOST</span> <span class="o">=</span> <span class="s2">&quot;localhost&quot;</span> <span class="c1"># host for database here &quot;localhost&quot;.</span>
+<span class="n">DB_USER</span> <span class="o">=</span> <span class="s2">&quot;postgres&quot;</span> <span class="c1">#username for database here default &quot;postgres&quot;.</span>
+<span class="n">DB_PASS</span> <span class="o">=</span> <span class="s2">&quot;1234&quot;</span> <span class="c1"># password for database currently ommited.</span>
+
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">dbname</span><span class="o">=</span><span class="n">DB_NAME</span> <span class="p">,</span> <span class="n">user</span><span class="o">=</span> <span class="n">DB_USER</span> <span class="p">,</span> <span class="n">password</span><span class="o">=</span> <span class="n">DB_PASS</span> <span class="p">,</span> <span class="n">host</span><span class="o">=</span> <span class="n">DB_HOST</span><span class="p">)</span> <span class="c1">#connecting declared database with &quot;conn&quot; variable via psycopg2.</span>
+
+<span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">(</span><span class="n">cursor_factory</span><span class="o">=</span><span class="n">psycopg2</span><span class="o">.</span><span class="n">extras</span><span class="o">.</span><span class="n">DictCursor</span><span class="p">)</span> <span class="c1">#connecting the cursor.</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+
+
+
+<div class="viewcode-block" id="allNotices"><a class="viewcode-back" href="../notice_board.html#notice_board.allNotices">[docs]</a><span class="k">def</span> <span class="nf">allNotices</span><span class="p">():</span> 
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    shows all notices form the database and renders to Office Management System&#39;s Notice Board page.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;select notice_body from notice_board ;&quot;</span><span class="p">)</span> <span class="c1">#geetting data via sql command in cursor from the database.</span>
+    <span class="n">all_notices</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span> <span class="c1">#fetching all data from cursor.</span>
+    <span class="c1">#&quot;print(all_notices)&quot; printing to check it on terminal. This line was created for testing purpose.</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&quot;notice_board.html&quot;</span> <span class="p">,</span> <span class="n">notices</span> <span class="o">=</span> <span class="n">all_notices</span><span class="p">)</span> <span class="c1">#returning to template page.</span></div>
+    <span class="c1">#&quot;return all_notices&quot; This line was created for testing purpose.</span>
+<div class="viewcode-block" id="groupByDate"><a class="viewcode-back" href="../notice_board.html#notice_board.groupByDate">[docs]</a><span class="k">def</span> <span class="nf">groupByDate</span><span class="p">():</span> 
+    <span class="sd">&quot;&quot;&quot;        </span>
+<span class="sd">    groups all the notices by present date and shows notices posted today.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;select notice_body from notice_board where post_date = CURRENT_DATE;&quot;</span><span class="p">)</span> <span class="c1">#geetting data via sql command in cursor from the database.</span>
+    <span class="n">todays_notices</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span> <span class="c1">#fetching all data from cursor.</span>
+    <span class="c1">#&quot;print(todays_notices)&quot; printing to check it on terminal. This line was created for testing purpose.</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&quot;notice_board.html&quot;</span> <span class="p">,</span> <span class="n">notices</span><span class="o">=</span> <span class="n">todays_notices</span><span class="p">)</span> <span class="c1">#returning to template page.</span></div>
+    <span class="c1">#&quot;return todays_notices&quot; This line was created for testing purpose.</span>
+
+<div class="viewcode-block" id="groupByDept"><a class="viewcode-back" href="../notice_board.html#notice_board.groupByDept">[docs]</a><span class="k">def</span> <span class="nf">groupByDept</span><span class="p">(</span><span class="n">dpt</span><span class="p">):</span> 
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    groups notices by department and shows selected notices.</span>
+<span class="sd">    :type dpt: string</span>
+<span class="sd">    :param dpt: desired department name to see department associated notices.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;select notice_body from notice_board where dept_id = &quot;</span> <span class="o">+</span><span class="n">dpt</span><span class="o">+</span><span class="s2">&quot; ;&quot;</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span> <span class="c1">#geetting data via sql command in cursor from the database.</span>
+    <span class="n">dept_notices</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span> <span class="c1">#fetching all data from cursor.</span>
+    <span class="c1">#&quot;print(dept_notices)&quot; printing to check it on terminal. This line was created for testing purpose.</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&quot;notice_board.html&quot;</span> <span class="p">,</span> <span class="n">notices</span><span class="o">=</span> <span class="n">dept_notices</span><span class="p">)</span> <span class="c1">#returning to template page.</span></div>
+    <span class="c1">#&quot;return dept_notices&quot;  This line was created for testing purpose.</span>
+
+
+<div class="viewcode-block" id="groupByPriority"><a class="viewcode-back" href="../notice_board.html#notice_board.groupByPriority">[docs]</a><span class="k">def</span> <span class="nf">groupByPriority</span><span class="p">(</span><span class="n">pt</span><span class="p">):</span> 
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    groups notices by their priority level and shows them.</span>
+<span class="sd">    :type pt: string</span>
+<span class="sd">    :param pt: desired priority level to see associated notices.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;select notice_body from notice_board where priority_level =&quot;</span><span class="o">+</span> <span class="n">pt</span> <span class="o">+</span><span class="s2">&quot;;&quot;</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span> <span class="c1">#geetting data via sql command in cursor from the database.</span>
+    <span class="n">priority_notices</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span> <span class="c1">#fetching all data from cursor.</span>
+    <span class="c1">#&quot;print(priority_notices)&quot; printing to check it on terminal. This line was created for testing purpose.</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&quot;notice_board.html&quot;</span> <span class="p">,</span> <span class="n">notices</span><span class="o">=</span> <span class="n">priority_notices</span><span class="p">)</span> <span class="c1">#returning to template page.</span></div>
+    <span class="c1">#&quot;return priority_notices&quot; This line was created for testing purpose.</span>
+
+
+
+
+
+<span class="c1">#this main finction was also created for testing purpose</span>
+<span class="c1">#def main(): </span>
+    <span class="c1">#allNotices()</span>
+    <span class="c1">#groupByDate()</span>
+    <span class="c1">#groupByDept(&#39;333&#39;)</span>
+    <span class="c1">#groupByPriority(&#39;5&#39;)  </span>
+
+<span class="c1">#if __name__ == &quot;__main__&quot;:</span>
+   <span class="c1"># main()</span>
+
+
+
+<span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span> <span class="c1">#commiting to trace redundancy</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span> <span class="c1">#closing cursor</span>
+<span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span> <span class="c1">#closing connection with database</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Ashiqur Rahman.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
