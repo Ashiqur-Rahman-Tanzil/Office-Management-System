@@ -1,0 +1,62 @@
+{% extends "home.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+</head>
+<body>
+{% block content %}
+     <title>Attendance Record</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+          $(document).ready(function ()
+              {
+                  var total_present=0;
+                  var pr;
+                  $("td:nth-child(3)").each(function ()
+                  {
+                      pr=$(this).html();
+                      total_present+=parseInt(pr);
+                      $("#total_present").text(total_present);
+                  });
+              }
+          );
+
+    </script>
+
+
+     <link rel="stylesheet" type="text/css" href={% static 'CSS/ab_view_style.css' %}>
+<h1>Attendance Record</h1>
+
+{% if av %}
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Leave</th>
+        <th>Present</th>
+        <th>Date</th>
+    </tr>
+    {% for a in av %}
+    <tr>
+       <td>{{ a.employee_id }}</td>
+       <td>{{ a.leave_application }}</td>
+        <td>{{ a.present }}</td>
+       <td>{{ a.open_date }}</td>
+    </tr>
+    {% endfor %}
+
+    <tr>
+    <td colspan="2">Total</td>
+    <td id="total_present" style="font-weight: bold"></td>
+    </tr>
+
+    {% endif %}
+{% endblock content %}
+</table>
+
+
+
+</body>
+</html>

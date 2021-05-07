@@ -1,0 +1,314 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>tst.views &#8212; Office Management System 2021 documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for tst.views</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span>
+<span class="kn">from</span> <span class="nn">tst.models</span> <span class="kn">import</span> <span class="n">attendance</span><span class="p">,</span> <span class="n">employeeOfTheMonth</span>
+
+
+<div class="viewcode-block" id="home"><a class="viewcode-back" href="../../tst.html#tst.views.home">[docs]</a><span class="k">def</span> <span class="nf">home</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">     This method is used to display home page.</span>
+
+
+<span class="sd">     :param request: it&#39;s a HttpResponse from user.</span>
+
+
+<span class="sd">     :type request: HttpResponse.</span>
+
+
+<span class="sd">     :return: this method returns a home page</span>
+<span class="sd">      which is a HTML page.</span>
+
+
+<span class="sd">     :rtype: HttpResponse.</span>
+<span class="sd">     &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;home.html&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ab_view"><a class="viewcode-back" href="../../tst.html#tst.views.ab_view">[docs]</a><span class="k">def</span> <span class="nf">ab_view</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">     This method is used to display attendance record page.</span>
+
+
+<span class="sd">     :param request: it&#39;s a HttpResponse from user.</span>
+
+
+<span class="sd">     :type request: HttpResponse.</span>
+
+
+<span class="sd">     :return: this method returns a attendance record page with all the available entry</span>
+<span class="sd">      which is a HTML page.</span>
+
+
+<span class="sd">     :rtype: HttpResponse.</span>
+<span class="sd">     &quot;&quot;&quot;</span>
+    <span class="n">ab_view</span> <span class="o">=</span> <span class="n">attendance</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;ab_view.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;av&#39;</span><span class="p">:</span> <span class="n">ab_view</span><span class="p">})</span></div>
+
+
+<div class="viewcode-block" id="ab_input"><a class="viewcode-back" href="../../tst.html#tst.views.ab_input">[docs]</a><span class="k">def</span> <span class="nf">ab_input</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">     This method is used to display attendance input page.</span>
+
+
+<span class="sd">     :param request: it&#39;s a HttpResponse from user.</span>
+
+
+<span class="sd">     :type request: HttpResponse.</span>
+
+
+<span class="sd">     :return: this method returns a attendance input page where user can input attendance</span>
+<span class="sd">      which is a HTML page.</span>
+
+
+<span class="sd">     :rtype: HttpResponse.</span>
+<span class="sd">     &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;ab_input.html&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="input_attendance"><a class="viewcode-back" href="../../tst.html#tst.views.input_attendance">[docs]</a><span class="k">def</span> <span class="nf">input_attendance</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method is used to submit the attendance into the database</span>
+
+
+<span class="sd">        :param request: it&#39;s a HttpResponse from user.</span>
+
+
+<span class="sd">        :type request: HttpResponse.</span>
+
+
+<span class="sd">        :return: this method returns the attendance input page which is a html page.</span>
+
+
+<span class="sd">        :rtype: HttpResponse.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This is post&quot;</span><span class="p">)</span>
+        <span class="n">employee_id</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s1">&#39;employee_id&#39;</span><span class="p">]</span>
+        <span class="n">leave_application</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s1">&#39;leave_application&#39;</span><span class="p">]</span>
+        <span class="n">open_date</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s1">&#39;open_date&#39;</span><span class="p">]</span>
+        <span class="n">present</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s1">&#39;present&#39;</span><span class="p">]</span>
+
+        <span class="n">ins_att</span> <span class="o">=</span> <span class="n">attendance</span><span class="p">(</span><span class="n">employee_id</span><span class="o">=</span><span class="n">employee_id</span><span class="p">,</span> <span class="n">leave_application</span><span class="o">=</span><span class="n">leave_application</span><span class="p">,</span> <span class="n">open_date</span><span class="o">=</span><span class="n">open_date</span><span class="p">,</span>
+                             <span class="n">present</span><span class="o">=</span><span class="n">present</span><span class="p">)</span>
+        <span class="n">ins_att</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;the data has been written to the db&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;ab_input.html&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="employee_of_the_month"><a class="viewcode-back" href="../../tst.html#tst.views.employee_of_the_month">[docs]</a><span class="k">def</span> <span class="nf">employee_of_the_month</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">     This method is used to display employee of the month  page.</span>
+
+
+<span class="sd">     :param request: it&#39;s a HttpResponse from user.</span>
+
+
+<span class="sd">     :type request: HttpResponse.</span>
+
+
+<span class="sd">     :return: this method returns a employee of the month html page  here it has two options.one is view and another</span>
+<span class="sd">     one is rate pages.</span>
+
+
+<span class="sd">     :rtype: HttpResponse.</span>
+<span class="sd">     &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;employee_of_the_month.html&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="attendance_page"><a class="viewcode-back" href="../../tst.html#tst.views.attendance_page">[docs]</a><span class="k">def</span> <span class="nf">attendance_page</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">     This method is used to display attendance  page.</span>
+
+
+<span class="sd">     :param request: it&#39;s a HttpResponse from user.</span>
+
+
+<span class="sd">     :type request: HttpResponse.</span>
+
+
+<span class="sd">     :return: this method returns a attendance html page where it has two options.one is view and another one is input.</span>
+
+
+
+<span class="sd">     :rtype: HttpResponse.</span>
+<span class="sd">     &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;attendance_page.html&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="emb_view"><a class="viewcode-back" href="../../tst.html#tst.views.emb_view">[docs]</a><span class="k">def</span> <span class="nf">emb_view</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">     This method is used to display EOM record page.</span>
+
+
+<span class="sd">     :param request: it&#39;s a HttpResponse from user.</span>
+
+
+<span class="sd">     :type request: HttpResponse.</span>
+
+
+<span class="sd">     :return: this method returns a EOM record html page with all the available entry</span>
+<span class="sd">      w</span>
+
+
+<span class="sd">     :rtype: HttpResponse.</span>
+<span class="sd">     &quot;&quot;&quot;</span>
+    <span class="n">emb_view</span> <span class="o">=</span> <span class="n">employeeOfTheMonth</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;emb_view.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;emb&#39;</span><span class="p">:</span> <span class="n">emb_view</span><span class="p">})</span></div>
+
+
+<div class="viewcode-block" id="emb_rate"><a class="viewcode-back" href="../../tst.html#tst.views.emb_rate">[docs]</a><span class="k">def</span> <span class="nf">emb_rate</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">     This method is used to display EOM rate record page.</span>
+
+
+<span class="sd">     :param request: it&#39;s a HttpResponse from user.</span>
+
+
+<span class="sd">     :type request: HttpResponse.</span>
+
+
+<span class="sd">     :return: this method returns a EOM rate page</span>
+<span class="sd">      which is a HTML page.</span>
+
+
+<span class="sd">     :rtype: HttpResponse.</span>
+<span class="sd">     &quot;&quot;&quot;</span>
+    <span class="n">emb_rate</span> <span class="o">=</span> <span class="n">employeeOfTheMonth</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;emb_rate.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;er&#39;</span><span class="p">:</span> <span class="n">emb_rate</span><span class="p">})</span></div>
+
+
+<div class="viewcode-block" id="emb_rate_input"><a class="viewcode-back" href="../../tst.html#tst.views.emb_rate_input">[docs]</a><span class="k">def</span> <span class="nf">emb_rate_input</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            This method is used to submit the Employee&#39;s rating  into the database</span>
+
+
+<span class="sd">            :param request: it&#39;s a HttpResponse from user.</span>
+
+
+<span class="sd">            :type request: HttpResponse.</span>
+
+
+<span class="sd">            :return: this method returns the EOM rate page which is a html page.</span>
+
+
+<span class="sd">            :rtype: HttpResponse.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This is post&quot;</span><span class="p">)</span>
+        <span class="n">employee_id</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s1">&#39;employee_id&#39;</span><span class="p">]</span>
+        <span class="n">attendance_point</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s1">&#39;attendance_point&#39;</span><span class="p">]</span>
+        <span class="n">project_point</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s1">&#39;project_point&#39;</span><span class="p">]</span>
+        <span class="n">attitude_point</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s1">&#39;attitude_point&#39;</span><span class="p">]</span>
+        <span class="n">leadership_point</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s1">&#39;leadership_point&#39;</span><span class="p">]</span>
+        <span class="n">cooperation_point</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s1">&#39;cooperation_point&#39;</span><span class="p">]</span>
+        <span class="n">work_quality_point</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s1">&#39;work_quality_point&#39;</span><span class="p">]</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span>
+        <span class="n">total_point</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s1">&#39;total_point&#39;</span><span class="p">]</span>
+
+        <span class="n">ins_em</span> <span class="o">=</span> <span class="n">employeeOfTheMonth</span><span class="p">(</span><span class="n">employee_id</span><span class="o">=</span><span class="n">employee_id</span><span class="p">,</span> <span class="n">attendance_point</span><span class="o">=</span><span class="n">attendance_point</span><span class="p">,</span>
+                                    <span class="n">project_point</span><span class="o">=</span><span class="n">project_point</span><span class="p">,</span>
+                                    <span class="n">attitude_point</span><span class="o">=</span><span class="n">attitude_point</span><span class="p">,</span> <span class="n">work_quality_point</span><span class="o">=</span><span class="n">work_quality_point</span><span class="p">,</span>
+                                    <span class="n">leadership_point</span><span class="o">=</span><span class="n">leadership_point</span><span class="p">,</span> <span class="n">cooperation_point</span><span class="o">=</span><span class="n">cooperation_point</span><span class="p">,</span> <span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">,</span>
+                                    <span class="n">total_point</span><span class="o">=</span><span class="n">total_point</span><span class="p">)</span>
+        <span class="n">ins_em</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;the data has been written to the db&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;emb_rate.html&#39;</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Office Management System</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Zahid Hasan.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

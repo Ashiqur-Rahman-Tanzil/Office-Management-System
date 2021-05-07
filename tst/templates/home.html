@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href={% static 'CSS/style.css' %}>
+</head>
+<body>
+
+
+<div class="header">
+  <h1>Office Management System
+  </h1>
+</div>
+
+ <ul>
+  <li><a href="home">Home</a></li>
+  <li><a href="news.asp">Notice Board</a></li>
+  <li><a href="contact.asp">Meeting</a></li>
+  <li><a href="attendance_page">Attendance</a></li>
+  <li><a href="about.asp">Salary</a></li>
+  <li><a href="employee_of_the_month">Employee Of the month</a></li>
+</ul>
+{% block content %}
+    <title>home</title>
+{% endblock content %}
+</body>
+</html>
