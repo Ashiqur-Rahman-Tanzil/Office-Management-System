@@ -1,0 +1,101 @@
+{% extends "index.html" %} {% block title %}Office Stuff{% endblock %} {% block
+content %}
+<br />
+<h1 align="center">Stuff Page</h1>
+<br />
+
+<h2 align="center">Managers</h2>
+<br />
+
+<div class="row justify-content-center">
+  <ul class="col-12 col-md-10 col-lg-8">
+    {% if managers %} {% for manager in managers %}
+    <li>
+      <div class="card mb-3">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img
+              src="https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659651_960_720.png"
+              alt="..."
+              class="img-fluid"
+            />
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{manager.name}}</h5>
+              <p class="card-text">{{manager.contact}}</p>
+              <p class="card-text">
+                <small class="text-muted">{{manager.branch}}</small>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+    {% endfor %} {% endif %}
+  </ul>
+</div>
+
+<br />
+<h2 align="center">Account Officers</h2>
+<br />
+
+<div class="row justify-content-center">
+  <ul class="col-12 col-md-10 col-lg-8">
+    {% if account_officers %} {% for account_officer in account_officers%}
+    <li>
+      <div class="card mb-3">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img
+              src="https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584_1280.png"
+              alt="..."
+              class="img-fluid"
+            />
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{ account_officer.name }}</h5>
+              <p class="card-text">{{ account_officer.contact }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+    {% endfor %} {% endif %}
+  </ul>
+</div>
+
+<br />
+<h2 align="center">Employees</h2>
+<br />
+
+<div class="row justify-content-center">
+  <ul class="col-12 col-md-10 col-lg-8">
+    {% if employees %} {% for employee in employees %}
+
+    <li>
+      <div class="card mb-3">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img
+              src="https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584_1280.png"
+              alt="..."
+              class="img-fluid"
+            />
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{ employee.name }}</h5>
+              <p class="card-text">{{ employee.contact }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    {% endfor %} {% endif %}
+  </ul>
+</div>
+
+{% endblock %}

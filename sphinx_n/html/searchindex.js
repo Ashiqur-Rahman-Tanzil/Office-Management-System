@@ -1,0 +1,1 @@
+Search.setIndex({envversion:47,filenames:["auth","index","modules","views"],objects:{},objnames:{},objtypes:{},terms:{index:1,page:1,search:1,view:[1,2]},titles:["auth module","Welcome to office management system&#8217;s documentation!","source","views module"],titleterms:{auth:0,document:1,indic:1,manag:1,modul:[0,3],offic:1,sourc:[1,2],system:1,tabl:1,view:3,welcom:1}})
