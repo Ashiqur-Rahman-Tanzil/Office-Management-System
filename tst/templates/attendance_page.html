@@ -1,0 +1,24 @@
+{% extends "home.html" %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+{% block content %}
+    <title>Attendance</title>
+<div class="btn-group">
+    <form action="ab_view">
+    <button class="button">view</button>
+    </form>
+    <form action="ab_input">
+    <button class="button">input</button>
+    </form>
+</div>
+{% endblock content %}
+
+</body>
+</html>

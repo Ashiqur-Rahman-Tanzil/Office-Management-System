@@ -1,0 +1,50 @@
+{% extends 'home.html' %}
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rate</title>
+</head>
+<body>
+
+{% block content %}
+     <link rel="stylesheet" type="text/css" href={% static 'CSS/ab_view_style.css' %}>
+     <form  action="emb_rate_input" method="post">
+     {% csrf_token %}
+
+         <table>
+             <tr>
+                 <th>ID</th>
+                 <th>Attendance</th>
+                 <th>Project</th>
+                 <th>Attitude</th>
+                 <th>Leadership</th>
+                 <th>Cooperation</th>
+                 <th>Work Quality</th>\
+                 <th>Date</th>
+                 <th>Total Point</th>
+             </tr>
+
+             <tr>
+
+                 <td><input type="text" name="employee_id"></td>
+                 <td class="subject" ><input type="number" name="attendance_point"></td>
+                 <td class="subject"><input type="number" name="project_point"></td>
+                 <td class="subject"><input type="number" name="attitude_point"></td>
+                 <td class="subject"><input type="number" name="leadership_point"></td>
+                 <td class="subject"><input type="number" name="cooperation_point"></td>
+                  <td class="subject"><input type="number" name="work_quality_point"></td>
+                 <td><input type="date" name = "date"></td>
+                 <td id="total_point"><input type="text" name="total_point"></td>
+
+                 <td ></td>
+             </tr>
+
+         </table>
+         <input type="submit"><br>
+    </form>
+
+{% endblock content %}
+</body>
+</html>

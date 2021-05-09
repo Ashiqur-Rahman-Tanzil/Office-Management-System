@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>test.test_models &#8212; Office Management System 2021 documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for test.test_models</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">django.test</span> <span class="kn">import</span> <span class="n">TestCase</span><span class="p">,</span> <span class="n">Client</span>
+<span class="kn">from</span> <span class="nn">tst.models</span> <span class="kn">import</span> <span class="n">attendance</span><span class="p">,</span> <span class="n">employeeOfTheMonth</span><span class="p">,</span> <span class="n">employee</span>
+
+
+<div class="viewcode-block" id="TestModel"><a class="viewcode-back" href="../../test.html#test.test_models.TestModel">[docs]</a><span class="k">class</span> <span class="nc">TestModel</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+<div class="viewcode-block" id="TestModel.test_attendance"><a class="viewcode-back" href="../../test.html#test.test_models.TestModel.test_attendance">[docs]</a>    <span class="k">def</span> <span class="nf">test_attendance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">attendance</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">employee_id</span><span class="o">=</span><span class="s1">&#39;111&#39;</span><span class="p">,</span> <span class="n">leave_application</span><span class="o">=</span><span class="s1">&#39;n&#39;</span><span class="p">,</span> <span class="n">open_date</span><span class="o">=</span><span class="s1">&#39;2021-05-02&#39;</span><span class="p">,</span>
+                                      <span class="n">present</span><span class="o">=</span><span class="s1">&#39;1&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">),</span> <span class="s1">&#39;111&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestModel.test_employee_of_the_month"><a class="viewcode-back" href="../../test.html#test.test_models.TestModel.test_employee_of_the_month">[docs]</a>    <span class="k">def</span> <span class="nf">test_employee_of_the_month</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">employeeOfTheMonth</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">employee_id</span><span class="o">=</span><span class="s1">&#39;111&#39;</span><span class="p">,</span> <span class="n">attendance_point</span><span class="o">=</span><span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="n">project_point</span><span class="o">=</span><span class="s1">&#39;2&#39;</span><span class="p">,</span>
+                                              <span class="n">attitude_point</span><span class="o">=</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="n">work_quality_point</span><span class="o">=</span><span class="s1">&#39;1&#39;</span><span class="p">,</span>
+                                              <span class="n">leadership_point</span><span class="o">=</span><span class="s1">&#39;5&#39;</span><span class="p">,</span> <span class="n">cooperation_point</span><span class="o">=</span><span class="s1">&#39;6&#39;</span><span class="p">,</span> <span class="n">total_point</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                                              <span class="n">date</span><span class="o">=</span><span class="s1">&#39;2021-05-02&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="s1">&#39;111&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestModel.test_employee"><a class="viewcode-back" href="../../test.html#test.test_models.TestModel.test_employee">[docs]</a>    <span class="k">def</span> <span class="nf">test_employee</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">employee</span><span class="p">(</span><span class="n">employee_id</span><span class="o">=</span><span class="s1">&#39;222&#39;</span><span class="p">,</span> <span class="n">user_name</span><span class="o">=</span><span class="s1">&#39;zahid&#39;</span><span class="p">,</span> <span class="n">user_password</span><span class="o">=</span><span class="s1">&#39;234234&#39;</span><span class="p">,</span> <span class="n">dept_name</span><span class="o">=</span><span class="s1">&#39;R&amp;D&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">c</span><span class="p">),</span> <span class="s1">&#39;222&#39;</span><span class="p">)</span></div></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">TestModel</span><span class="p">()</span>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Office Management System</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Zahid Hasan.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

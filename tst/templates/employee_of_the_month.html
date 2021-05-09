@@ -1,0 +1,29 @@
+{% extends "home.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+
+{% block content %}
+<title>Employee of the month</title>
+
+<div class="btn-group">
+    <form action="emb_view">
+    <button class="button">view</button>
+    </form>
+    <form action="emb_rate">
+    <button class="button">Rate</button>
+    </form>
+</div>
+{% endblock content %}
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+{% extends 'home.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EOM record</title>
+</head>
+<body>
+{% block content %}<link rel="stylesheet" type="text/css" href={% static 'CSS/ab_view_style.css' %}>
+{% if emb %}
+    <table>
+         <tr>
+             <th>ID</th>
+             <th>Attendance</th>
+             <th>Project</th>
+             <th>Attitude</th>
+             <th>Leadership</th>
+             <th>Cooperation</th>
+             <th>Work Quality</th>\
+             <th>Date</th>
+             <th>Total Point</th>
+         </tr>
+    {% for a in emb %}
+        <tr>
+           <td>{{ a.employee_id }}</td>
+           <td>{{ a.attendance_point }}</td>
+            <td>{{ a.project_point }}</td>
+           <td>{{ a.attitude_point }}</td>
+           <td>{{ a.leadership_point }}</td>
+           <td>{{ a.cooperation_point}}</td>
+           <td>{{ a.work_quality_point}}</td>
+           <td>{{ a.date}}</td>
+           <td>{{ a.total_point}}</td>
+
+        </tr>
+    {% endfor %}
+    {% endif %}
+
+    </table>
+{% endblock content %}
+</body>
+</html>
